@@ -72,7 +72,7 @@ li {
   .content {
     top: 45vh;
     width: 100%;
-    padding: 0 4vw;
+    padding: 0 5vw;
     overflow: auto;
     bottom: 0;
   }
@@ -99,7 +99,7 @@ li {
       <h1>FHIR and Brihmstone</h1>
       <h2>A Digital Health Manifesto</h2>
       <p>
-        As of Jan 2023 digital health systems are still not providing
+        It is Jan 2023. Digital health systems are failing to deliver
         patients and healthcare providers the data they need, when they
         need it. The FHIR standard provides a healthcare data transfer model.
         Brihmstone proposes:
@@ -183,6 +183,10 @@ float map(vec3 p)
   //return sphere(p+vec3(0,sin(1.4*time),0))-.6*noise(8.*p+3.*bounce);
   //return sphere(p);
   //return heart(p);
+  float heartbeat = abs(sin(time/.15)) + sin(time/.15)*.3;
+  if (heartbeat < 0.01 || sin(time/.3) < 0.01) {
+    heartbeat=0.01;
+  }
   return min(sdBox(
       p+vec3(0,0,0), // position
       vec3(.8, .2, 2.) // box
@@ -190,7 +194,7 @@ float map(vec3 p)
       p+vec3(0,0,0), // position
       vec3(2., .2, .8) // box
       ))
-      -.1*noise(5.*p+3.*bounce)
+      - .1*(heartbeat*1.5+1.5)*noise(3.*(-cos(time/3.)+1.)*p+3.*bounce)
       ;
 }
 

@@ -184,7 +184,7 @@ float map(vec3 p)
     heartbeat=0.001;
   }  
   //return length(p)-1.; // cat eye.
-	p.z-=1.0-heartbeat*.1;
+	p.z-=1.0-heartbeat*.025;
   //p*=0.9;
   // rotation.
   pR(p.yz,3.14/2.-(mouse.y/res.y - .5)*3.14*.5); //+ abs(sin(time) * p.x * .2); // morph
@@ -203,7 +203,7 @@ float map(vec3 p)
       p+vec3(0,0,0), // position
       vec3(2., .2, .8) // box
       ))
-      - .15*noise((2.*warble+2.)*p+3.)
+      - (heartbeat + 1. + warble)*.05*noise((4.*warble+2.)*p+3.)
       ;
 }
 
